@@ -68,9 +68,12 @@ body{display:flex;align-items:center;justify-content:center;min-height:100vh;pad
 }
 
 .intro-name{
-  font-family:'Cormorant',serif;font-style:italic;font-weight:600;
-  font-size:52px;letter-spacing:5px;color:var(--text);
-  opacity:0;text-shadow:0 0 60px rgba(204,36,36,.18);
+  display:block;width:200px;height:108px;
+  background:var(--text);
+  -webkit-mask:url('logo2.png') center/contain no-repeat;
+  mask:url('logo2.png') center/contain no-repeat;
+  filter:drop-shadow(0 0 26px rgba(204,36,36,.35));
+  opacity:0;
   animation:ifade .7s ease 2.8s forwards;
 }
 .intro-sub{
@@ -523,7 +526,7 @@ footer .mark{color:var(--ember);}
     <!-- centre dot -->
     <circle class="is-dot" cx="100" cy="100" r="3.5" fill="var(--glow)" stroke="none"/>
   </svg>
-  <span class="intro-name">Nex</span>
+  <span class="intro-name" role="img" aria-label="Nex"></span>
   <span class="intro-sub">initializing signal</span>
 </div>
 
