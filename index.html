@@ -466,6 +466,28 @@ footer .mark{color:var(--ember);}
 /* ─── Shared keyframes ───────────────────────────────────────────── */
 @keyframes spin-slow{to{transform:rotate(360deg);}}
 
+/* ─── Hidden scrollbar (page still scrolls if it must) ──────────── */
+html{scrollbar-width:none;-ms-overflow-style:none;}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none;}
+
+/* ─── Scale down on shorter screens so everything fits ──────────── */
+@media(max-height:850px){
+  .stage{zoom:.9;}
+  body{padding:30px 16px;}
+}
+@media(max-height:760px){
+  .stage{zoom:.8;}
+  body{padding:22px 16px;}
+}
+@media(max-height:670px){
+  .stage{zoom:.7;}
+  body{padding:16px 14px;}
+}
+@media(max-height:580px){
+  .stage{zoom:.6;}
+  body{padding:12px 12px;}
+}
+  
 /* ─── Reduced motion ─────────────────────────────────────────────── */
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;}}
 </style>
