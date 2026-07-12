@@ -470,22 +470,9 @@ footer .mark{color:var(--ember);}
 html{scrollbar-width:none;-ms-overflow-style:none;}
 html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none;}
 
-/* ─── Scale down on shorter screens so everything fits ──────────── */
-@media(max-height:850px){
-  .stage{zoom:.9;}
-  body{padding:30px 16px;}
-}
-@media(max-height:760px){
-  .stage{zoom:.8;}
-  body{padding:22px 16px;}
-}
-@media(max-height:670px){
-  .stage{zoom:.7;}
-  body{padding:16px 14px;}
-}
-@media(max-height:580px){
-  .stage{zoom:.6;}
-  body{padding:12px 12px;}
+/* ─── Fit-to-screen (zoom value set dynamically from JS) ────────── */
+@media(max-height:1000px){
+  body{padding:14px 12px;}
 }
   
 /* ─── Reduced motion ─────────────────────────────────────────────── */
@@ -1462,6 +1449,31 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none;}
     tick();
   })();
 
+   /* ── Fit-to-screen: continuously scale the stage ── */
+  const stageEl=document.querySelector('.stage');
+  let lastZoom=0;
+  function fitStage(){
+    if(!stageEl)return;
+    const cs=getComputedStyle(document.body);
+    const availH=window.innerHeight
+      -parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)-4;
+    const availW=window.innerWidth
+      -parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-4;
+    /* scrollHeight is in the element's own px, unaffected by its zoom */
+    const z=Math.min(1,availH/stageEl.scrollHeight,availW/stageEl.scrollWidth);
+    if(Math.abs(z-lastZoom)>.005){
+      lastZoom=z;
+      stageEl.style.zoom=z;
+    }
+  }
+  fitStage();
+  window.addEventListener('resize',fitStage,{passive:true});
+  window.addEventListener('load',fitStage);
+  /* re-fit when panels/fonts change the stage size */
+  if(window.ResizeObserver)new ResizeObserver(fitStage).observe(stageEl);
+  setTimeout(fitStage,600);
+  setTimeout(fitStage,3200);
+  
   /* ── Custom cursor ────────────────────────────── */
   (function(){
     const cur=document.getElementById('cursor');
