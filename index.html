@@ -253,6 +253,15 @@ body{display:flex;align-items:center;justify-content:center;min-height:100vh;pad
 
 /* ─── Name ───────────────────────────────────────────────────────── */
 .name{font-family:'Cormorant',serif;font-style:italic;font-weight:600;font-size:38px;letter-spacing:1.5px;color:var(--text);margin-bottom:3px;display:inline-block;text-shadow:0 0 60px rgba(204,36,36,.09);animation:glitch 9s 6s infinite;}
+  /* gothic logo image: png is black glyphs on transparency → use it as a
+   mask so the lettering takes the page colour and glows */
+.name-logo{
+  display:block;width:176px;height:105px;margin:0 auto 4px;
+  background:var(--text);
+  -webkit-mask:url('logo1.png') center/contain no-repeat;
+  mask:url('logo1.png') center/contain no-repeat;
+  filter:drop-shadow(0 0 20px rgba(204,36,36,.3));
+}
 @keyframes glitch{0%,88%,100%{transform:none;text-shadow:0 0 60px rgba(204,36,36,.09);}88.5%{transform:translate(-3px,0) skewX(-4deg);text-shadow:3px 0 var(--glow),-1px 0 rgba(80,210,255,.22);}89.2%{transform:translate(3px,0);text-shadow:-3px 0 rgba(204,36,36,.8);}90%{transform:translate(-1px,1px);text-shadow:1px 0 var(--glow);}90.5%{transform:none;text-shadow:0 0 60px rgba(204,36,36,.09);}}
 
 /* ─── Motto / Bio ────────────────────────────────────────────────── */
@@ -672,7 +681,7 @@ footer .mark{color:var(--ember);}
                alt="nex">
         </div>
 
-        <h1 class="name">Nex</h1>
+        <h1 class="name name-logo" aria-label="Nex"></h1>
         <p class="motto">nusquam et ubique</p>
         <p class="bio">probably building something.<span class="cur">_</span></p>
 
