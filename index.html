@@ -684,8 +684,8 @@ footer .mark{color:var(--ember);}
 
         <div class="stats">
           <div class="stat">
-            <div class="num" id="visit-count">000</div>
-            <div class="lbl">visits</div>
+            <div class="num">11</div>
+            <div class="lbl">projects</div>
           </div>
           <div class="stat">
             <div class="num">
@@ -993,11 +993,10 @@ footer .mark{color:var(--ember);}
       :`${m}:${String(sec).padStart(2,'0')}`;
   },1000);
 
-  /* ── Visit counter ────────────────────────────── */
+  /* ── Visit counter (local-only) ────────────────────────────── */
   const KEY='nex_visits';
   const v=(parseInt(localStorage.getItem(KEY)||'0',10)||0)+1;
   localStorage.setItem(KEY,v);
-  document.getElementById('visit-count').textContent=String(v).padStart(3,'0');
   const pvEl=document.getElementById('p-vis');
   if(pvEl) pvEl.textContent=String(v).padStart(3,'0');
 
@@ -1007,7 +1006,6 @@ footer .mark{color:var(--ember);}
     "if you know, you know. if you don't, you weren't meant to.",
     "silence is a weapon most people forget they have.",
     "the deeper the dark, the brighter you burn.",
-    "build your world. let them wonder what's inside.",
     "control your signal. control your story.",
   ];
   let qIdx=0;
