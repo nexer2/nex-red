@@ -698,8 +698,8 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none;}
         <p class="bio">probably building something.<span class="cur">_</span></p>
 
         <div class="status">
-          <span class="dot-status" id="discord-dot"></span>
-          <span class="label"      id="discord-label">online</span>
+          <span class="dot-status offline" id="discord-dot"></span>
+          <span class="label"      id="discord-label">checking…</span>
           <span id="discord-activity"></span>
         </div>
 
@@ -967,6 +967,8 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none;}
   const uptEl=document.getElementById('p-uptime');
   const pcLed=document.getElementById('pc-led');
   const pcState=document.getElementById('pc-state');
+  const cardDot=document.getElementById('discord-dot');
+  const cardLbl=document.getElementById('discord-label');
   let pcBoot=0,pcSeen=0;
   function pcRender(){
     if(!uptEl)return;
@@ -976,6 +978,12 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none;}
     pcLed.style.background=on?'':'#3a3a3a';
     pcLed.style.boxShadow=on?'':'none';
     pcState.textContent=on?'online':'offline';
+    /* the badge under the name follows the same heartbeat */
+    if(cardDot)cardDot.className='dot-status'+(on?'':' offline');
+    if(cardLbl)cardLbl.textContent=on?'online':'offline';
+    /* radio plays only while the pc is actually on */
+    npOnline=on;
+    npTick();
     if(on&&pcBoot){
       let s=now-pcBoot;
       const d=Math.floor(s/86400);s%=86400;
